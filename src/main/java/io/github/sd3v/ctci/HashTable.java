@@ -7,7 +7,7 @@ public class HashTable {
 
     private static final int ARRAY_LENGTH = 16;
 
-    private LinkedList<Entry>[] array = new LinkedList[ARRAY_LENGTH];
+    private final LinkedList<Entry>[] internalArray = new LinkedList[ARRAY_LENGTH];
 
     private record Entry(String key, String value) {
     }
@@ -16,24 +16,24 @@ public class HashTable {
         var hash = getHashCode(key);
         var idx = hash % ARRAY_LENGTH;
 
-        if (array[idx] == null) {
-            array[idx] = new LinkedList<>();
+        if (internalArray[idx] == null) {
+            internalArray[idx] = new LinkedList<>();
         }
 
-        array[idx].add(new Entry(key, value));
+        internalArray[idx].add(new Entry(key, value));
     }
 
     public Optional<String> get(String key) {
         var hash = getHashCode(key);
         var idx = hash % ARRAY_LENGTH;
 
-        if (array[idx] == null) {
+        if (internalArray[idx] == null) {
             return Optional.empty();
         }
 
-        for (int i = 0; i < array[idx].size(); i++) {
-            if (array[idx].get(i).key.equals(key)) {
-                return Optional.of(array[idx].get(i).value);
+        for (Entry entry : internalArray[idx]) {
+            if (entry.key.equals(key)) {
+                return Optional.of(entry.value);
             }
         }
 

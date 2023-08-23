@@ -1,6 +1,6 @@
 package io.github.sd3v.ctci.explanations;
 
-public class StringBuilder {
+public class StringBuilderExample {
 
     /**
      * complexity is O(n2)... it comes from n(n + 1)/2
@@ -16,11 +16,19 @@ public class StringBuilder {
      * @param words
      * @return
      */
-    String joinWords(String[] words) {
+    String joinWords_old(String[] words) {
         String sentence = "";
         for (String w: words) {
             sentence = sentence + w;
         }
         return sentence;
+    }
+
+    String joinWords(String[] words) {
+        var sb = new StringBuilder();
+        for(String word : words) {
+            sb.append(word);
+        }
+        return sb.toString();
     }
 }

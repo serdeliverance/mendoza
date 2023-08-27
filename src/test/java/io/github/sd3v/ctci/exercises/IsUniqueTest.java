@@ -1,8 +1,8 @@
-package io.github.sd3v.ctci;
+package io.github.sd3v.ctci.exercises;
 
 import org.junit.jupiter.api.Test;
 
-import static io.github.sd3v.ctci.IsUnique.solution1;
+import static io.github.sd3v.ctci.exercises.IsUnique.solution1;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IsUniqueTest {

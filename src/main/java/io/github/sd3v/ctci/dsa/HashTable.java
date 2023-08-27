@@ -1,4 +1,4 @@
-package io.github.sd3v.ctci;
+package io.github.sd3v.ctci.dsa;
 
 import java.util.LinkedList;
 import java.util.Optional;

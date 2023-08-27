@@ -1,5 +1,6 @@
-package io.github.sd3v.ctci;
+package io.github.sd3v.ctci.dsa;
 
+import io.github.sd3v.ctci.dsa.HashTable;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;

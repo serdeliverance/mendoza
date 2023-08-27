@@ -1,4 +1,4 @@
-package io.github.sd3v.ctci;
+package io.github.sd3v.ctci.exercises;
 
 import java.util.HashMap;
 

@@ -15,8 +15,7 @@ public class ReverseWordsInString {
                     // DO nothing
                 }
                 else {
-                    var newWord = dequeAll(charQueue);
-                    wordStack.add(newWord);
+                    buildWordFromQueueAndStack(charQueue, wordStack);
                 }
             } else {
                 charQueue.offer(s.charAt(i));
@@ -24,11 +23,15 @@ public class ReverseWordsInString {
         }
 
         if (!charQueue.isEmpty()) {
-            var newWord = dequeAll(charQueue);
-            wordStack.add(newWord);
+            buildWordFromQueueAndStack(charQueue, wordStack);
         }
 
         return buildReversedWords(wordStack);
+    }
+
+    private static void buildWordFromQueueAndStack(Queue<Character> charQueue, Stack<String> wordStack) {
+        var newWord = dequeAll(charQueue);
+        wordStack.add(newWord);
     }
 
     private static String buildReversedWords(Stack<String> wordStack) {

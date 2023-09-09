@@ -5,51 +5,51 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class ReverseWordsInString {
-    public static String reverseWords(String s) {
-        var wordStack = new Stack<String>();
-        Queue<Character> charQueue = new LinkedList<>();
-        for (int i = 0; i < s.length(); i++) {
-            // TODO check first case
-            if (s.charAt(i) == ' ') {
-                if (i - 1 < 0 || s.charAt(i - 1) == ' ') {
-                    // DO nothing
-                }
-                else {
-                    buildWordFromQueueAndStack(charQueue, wordStack);
-                }
-            } else {
-                charQueue.offer(s.charAt(i));
-            }
+  public static String reverseWords(String s) {
+    var wordStack = new Stack<String>();
+    Queue<Character> charQueue = new LinkedList<>();
+    for (int i = 0; i < s.length(); i++) {
+      // TODO check first case
+      if (s.charAt(i) == ' ') {
+        if (i - 1 < 0 || s.charAt(i - 1) == ' ') {
+          // DO nothing
+        } else {
+          buildWordFromQueueAndStack(charQueue, wordStack);
         }
-
-        if (!charQueue.isEmpty()) {
-            buildWordFromQueueAndStack(charQueue, wordStack);
-        }
-
-        return buildReversedWords(wordStack);
+      } else {
+        charQueue.offer(s.charAt(i));
+      }
     }
 
-    private static void buildWordFromQueueAndStack(Queue<Character> charQueue, Stack<String> wordStack) {
-        var newWord = dequeAll(charQueue);
-        wordStack.add(newWord);
+    if (!charQueue.isEmpty()) {
+      buildWordFromQueueAndStack(charQueue, wordStack);
     }
 
-    private static String buildReversedWords(Stack<String> wordStack) {
-        var sb = new StringBuilder();
-        while (!wordStack.empty()) {
-            if (!sb.isEmpty()) {
-                sb.append(" ");
-            }
-            sb.append(wordStack.pop());
-        }
-        return sb.toString();
-    }
+    return buildReversedWords(wordStack);
+  }
 
-    private static String dequeAll(Queue<Character> charQueue) {
-        var sb = new StringBuilder();
-        while(!charQueue.isEmpty()) {
-            sb.append(charQueue.remove());
-        }
-        return sb.toString();
+  private static void buildWordFromQueueAndStack(
+      Queue<Character> charQueue, Stack<String> wordStack) {
+    var newWord = dequeAll(charQueue);
+    wordStack.add(newWord);
+  }
+
+  private static String buildReversedWords(Stack<String> wordStack) {
+    var sb = new StringBuilder();
+    while (!wordStack.empty()) {
+      if (!sb.isEmpty()) {
+        sb.append(" ");
+      }
+      sb.append(wordStack.pop());
     }
+    return sb.toString();
+  }
+
+  private static String dequeAll(Queue<Character> charQueue) {
+    var sb = new StringBuilder();
+    while (!charQueue.isEmpty()) {
+      sb.append(charQueue.remove());
+    }
+    return sb.toString();
+  }
 }

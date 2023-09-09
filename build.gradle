@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.diffplug.spotless' version '6.16.0'
 }
 
 tasks.withType(JavaCompile) {
@@ -19,6 +20,17 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
+
+spotless {
+    java {
+        googleJavaFormat("1.15.0")
+    }
+}
+
 test {
     useJUnitPlatform()
+}
+
+tasks.named('check').configure {
+    dependsOn spotlessCheck
 }

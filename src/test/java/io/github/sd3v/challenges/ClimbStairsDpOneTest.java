@@ -1,11 +1,11 @@
 package io.github.sd3v.challenges;
 
-import static io.github.sd3v.challenges.ClimbStairs.climbStairs;
+import static io.github.sd3v.challenges.ClimbStairsDpOne.climbStairs;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class ClimbStairsTest {
+class ClimbStairsDpOneTest {
 
   @Test
   public void scenario1() {
@@ -26,5 +26,12 @@ class ClimbStairsTest {
     var result = climbStairs(4);
 
     assertEquals(5, result);
+  }
+
+  @Test
+  public void scenarioLargeInput() {
+    var result = climbStairs(30);
+
+    assertEquals(1346269, result);
   }
 }

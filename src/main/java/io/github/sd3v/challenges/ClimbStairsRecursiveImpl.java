@@ -1,8 +1,8 @@
 package io.github.sd3v.challenges;
 
-public class ClimbStairs {
+// Recursive solution. Time complexity: O(n ** 2)
+public class ClimbStairsRecursiveImpl {
 
-  // Recursion impl
   public static int climbStairs(int stairs) {
     if (stairs == 1) {
       return 1;

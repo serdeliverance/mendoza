@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'com.diffplug.spotless' version '6.16.0'
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+group 'io.github.sd3v'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+
+spotless {
+    java {
+        googleJavaFormat("1.15.0")
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.named('check').configure {
+    dependsOn spotlessCheck
+}

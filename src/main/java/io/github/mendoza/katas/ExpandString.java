@@ -1,79 +1,107 @@
 package io.github.mendoza.katas;
 
 /*
- *
- * Expand string according to the number before square brackets.
- * Numbers are not necessarily single digits
- *
- * Input:
- * 2[ab]3[c]1[d]
+*
+* Expand string according to the number before square brackets.
+* Numbers are not necessarily single digits
+*
+* Input:
+* 2[ab]3[c]1[d]
 
- * Output:
- * ababcccd
- *
- */
+* Output:
+* ababcccd
+*
+*/
 
 import java.util.Stack;
 
+// TODO solve it using stringTokenizer
+// TODO solve it using regex
+// TODO understand why the provided solution is not optimal (the one that concatenates string)
+// it has something to do with creating String each time, instead of using StringBuilder (string
+// pool)
 public class ExpandString {
 
-    public static void main(String[] args) {
-        String input = new String("2[ab]3[c]1[d]");
-        String expandedString = expandString(input);
-        System.out.println("The expanded string is: " + expandedString);
+  /** Solution without using auxiliary DS, just traversing the string with while loops */
+  public static String expandString(String input) {
+    int index = 0;
+    StringBuilder sb = new StringBuilder();
+
+    while (index < input.length()) {
+      StringBuilder factorSb = new StringBuilder();
+      while (Character.isDigit(input.charAt(index))) {
+        factorSb.append(input.charAt(index));
+        index++;
+      }
+
+      index++;
+
+      StringBuilder termSb = new StringBuilder();
+      while (Character.isLetter(input.charAt(index))) {
+        termSb.append(input.charAt(index));
+        index++;
+      }
+
+      int factor = Integer.parseInt(factorSb.toString());
+      String term = termSb.toString();
+
+      sb.repeat(term, factor);
+
+      index++;
     }
 
-    public static String expandString(String input) {
+    return sb.toString();
+  }
 
-        StringBuilder sb = new StringBuilder();
-        Stack<Character> stack = new Stack<>();
+  /**
+   * My first attempt
+   *
+   * <p>This solution uses a stack for stacking read it stops at terminal tokens ([ or ]) and
+   * unstack it builds terms or factor depending on the terminal token and uses a string builder for
+   * creating the final string.
+   */
+  public static String expandString_mine(String input) {
 
-        int multiplier = 0;
-        String term;
+    StringBuilder sb = new StringBuilder();
+    Stack<Character> stack = new Stack<>();
 
-        for (int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
+    int multiplier = 0;
+    String term;
 
-            switch (c) {
-                case '[':
-                    multiplier = Integer.parseInt(unstack(stack));
-                    break;
-                case ']':
-                    term = unstack(stack);
-                    String stringPart = expandTermByMultiplier(term, multiplier);
-                    sb.append(stringPart);
-                    multiplier = 0;
-                    break;
-                default:
-                    stack.add(c);
-                    break;
-            }
-        }
+    for (int i = 0; i < input.length(); i++) {
+      char c = input.charAt(i);
 
-        return sb.toString();
+      switch (c) {
+        case '[':
+          multiplier = Integer.parseInt(unstack(stack));
+          break;
+        case ']':
+          term = unstack(stack);
+          expandTermByMultiplier(term, multiplier, sb);
+          break;
+        default:
+          stack.add(c);
+          break;
+      }
     }
 
-    private static String unstack(Stack<Character> stack) {
-        StringBuilder sb = new StringBuilder();
+    return sb.toString();
+  }
 
-        while(!stack.empty()) {
-            sb.append(stack.pop());
-        }
+  private static String unstack(Stack<Character> stack) {
+    StringBuilder sb = new StringBuilder();
 
-        return sb.reverse().toString();
+    while (!stack.empty()) {
+      sb.append(stack.pop());
     }
 
-    private static String expandTermByMultiplier(String term, int multiplier) {
-        if (multiplier == 0) {
-            return "";
-        }
+    return sb.reverse().toString();
+  }
 
-        if (multiplier == 1) {
-            return term;
-        }
-
-        StringBuilder sb = new StringBuilder();
-
-        return sb.repeat(term, multiplier).toString();
+  private static void expandTermByMultiplier(String term, int multiplier, StringBuilder sb) {
+    if (multiplier == 0) {
+      return;
     }
+    sb.repeat(term, multiplier);
+  }
 }

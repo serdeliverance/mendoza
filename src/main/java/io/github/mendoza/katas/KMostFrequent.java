@@ -12,6 +12,11 @@ import java.util.Map;
  */
 public class KMostFrequent {
 
+    /**
+     * Time = O(n log n)
+     * Space = O(n)
+     *
+     */
   public static int[] solution(int[] input, int k) {
     Map<Integer, Integer> numberFrequencyMap = new HashMap<>();
 

@@ -3,6 +3,8 @@ package io.github.mendoza.learning.corejava.synchronization.ex.tasksync;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
+// TODO implement it again with synchronized + wait() + notifyAll()
+// TODO implement it again with CountDownLatch
 public class BasicTaskSynchronization_ex2 {
   private static final ReentrantLock lock = new ReentrantLock();
   private static final Condition cond = lock.newCondition();
